@@ -1,9 +1,15 @@
 const express = require('express') ;
 const app = express() ;
 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static("public"));
+
 const PORT=3000;
 
 const path = require('path');
+
+const collection=require("./mongoose");
 
 app.get('/homepage',(req,res)=>{
     const filePath = path.join(__dirname, 'homepage.html');
@@ -13,21 +19,12 @@ app.get('/homepage',(req,res)=>{
 app.get('/login',(req,res)=>{
     const filePath = path.join(__dirname, 'login.html');
     res.sendFile(filePath);
-
-    let username = req.query.userId ;
-    let password = req.query.pswd ;
-
-    let validLogin = true;
-
-    validLogin = (username==="ari" && password==="123");
-
-    if(validLogin)
-        res.redirect('./homepage');
 })
 
 app.get('/register',(req,res)=>{
     const filePath = path.join(__dirname, 'register.html');
     res.sendFile(filePath);
+    //res.render('/prob');
 })
 
 app.get('/prob',(req,res)=>{
@@ -35,7 +32,12 @@ app.get('/prob',(req,res)=>{
     res.sendFile(filePath);
 })
 
+const Router = require("./routes");
+app.use(Router);
+
 app.listen(PORT, function (err) {
     if (err) console.log(err);
     console.log("Server listening on PORT", PORT);
 });
+
+

@@ -1,0 +1,14 @@
+.prob{
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #ffe4c4;
+    color: black;
+    font-size: 25px;
+    font-family: sans-serif;
+}
+
+.prob:hover{
+    color:aliceblue;
+background-color: black;
+}

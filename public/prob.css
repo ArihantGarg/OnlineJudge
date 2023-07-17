@@ -1,0 +1,69 @@
+.statement p {
+    font-size: 18px;
+}
+
+.statement h2 {
+    font-size: 30px;
+    text-align: center;
+    font-family: sans-serif;
+}
+
+.limits {
+    text-align: center;
+    font-size: 10px;
+}
+
+.statement h3 {
+    font-size: 25px;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+.submitfile {
+    border-radius: 5px;
+    width: fit-content;
+    margin: auto;
+    align-content: center;
+    text-align: center;
+    padding: 5px 5px;
+    background-color: aquamarine;
+}
+
+.submitfile input{
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.submitfile button{
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
+    border: none;
+    background-color:mistyrose;
+    padding: 14px 28px;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    border-color: green;
+    border-style: solid;
+    color: green;
+}
+
+.submitfile button:hover{
+    background-color:lightgreen;
+    color: black;
+}
+
+.verdict{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.verdict span{
+    color:red;
+}
+
