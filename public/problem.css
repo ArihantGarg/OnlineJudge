@@ -1,0 +1,32 @@
+.problem:hover .submitButton{
+    background-color: green;
+    color:aliceblue;
+}
+
+.problem {
+    color: black;
+    font-family: sans-serif;
+    font-size: 20px;
+    width: 93%;
+    margin-left: 20px;
+    padding-left: 20px;
+    margin-right: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row ;
+    justify-content: space-between;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: gray;
+    background-color:bisque;
+}
+
+.submitButton {
+    width: 25%;
+    font-size: 20px;
+}

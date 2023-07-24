@@ -2,6 +2,10 @@ body {
     background-image: url("./LoginPage.jpg");
 }
 
+html, body{
+    overflow:initial !important;
+}
+
 body {
     margin: 0;
     padding: 0;
