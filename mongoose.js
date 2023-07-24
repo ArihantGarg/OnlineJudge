@@ -1,6 +1,6 @@
 const mongoose=require("mongoose") ;
 
-const uri="mongodb+srv://Ishumani123:Maniishu321@cluster0.tcaohl8.mongodb.net/?retryWrites=true&w=majority";
+const uri="Replace with your uri";
 
 async function connect() {
     try {
