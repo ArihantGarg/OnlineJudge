@@ -1,6 +1,9 @@
 const mongoose=require("mongoose") ;
+const dotenv = require("dotenv");
 
-const uri="Replace with your uri";
+require('dotenv').config();
+dotenv.config({path: "./envfile/.env"})
+const uri=process.env.uri;
 
 async function connect() {
     try {

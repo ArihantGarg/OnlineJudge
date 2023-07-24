@@ -24,7 +24,6 @@ app.get('/login',(req,res)=>{
 app.get('/register',(req,res)=>{
     const filePath = path.join(__dirname, 'register.html');
     res.sendFile(filePath);
-    //res.render('/prob');
 })
 
 app.get('/prob',(req,res)=>{
