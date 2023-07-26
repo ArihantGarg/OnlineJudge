@@ -1,0 +1,287 @@
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+using namespace std;
+
+#define cin std::cin
+#define cout std::cout
+#define ordered_set tree<int, null_type, less<int>, rb_tree_tag, tree_order_statistics_node_update>
+#define fast_io                  \
+    ios::sync_with_stdio(false); \
+    cin.tie(0);
+#define int ll
+#define ll long long
+#define ld long double
+#define vi vector<ll>
+#define vvi vector<vi>
+#define vpi vector<pi>
+#define vvpi vector<vpi>
+#define pi pair<ll, ll>
+#define pb push_back
+#define sqrt(x) sqrtl(x);
+#define pow(a, x) powl(a, x);
+#define MOD 1000000007LL
+#define inf 1000000000000000000LL
+#define debug(x) cout << x << endl;
+#define debug2(x, y) cout << x << " " << y << endl;
+#define debug3(x, y, z) cout << x << " " << y << " " << z << endl;
+#define all(x) x.begin(), x.end()
+
+ll min(ll a, ll b)
+{
+    if (a < b)
+        return a;
+
+    return b;
+}
+
+ll max(ll a, ll b)
+{
+    if (a > b)
+        return a;
+
+    return b;
+}
+
+ll hcf(ll a, ll b)
+{
+    if (b == 0LL)
+        return a;
+
+    return hcf(b, a % b);
+}
+
+ll lcm(ll a, ll b) { return ((a * b) / hcf(a, b)); };
+
+string binary(ll n)
+{
+    string s = bitset<64>(n).to_string();
+    const auto loc1 = s.find('1');
+    if (loc1 != string::npos)
+    {
+        return s.substr(loc1);
+    }
+    return "0";
+}
+
+ll decimal(string s) { return stoll(s); }
+
+//
+
+ll modinv(ll p, ll q)
+{
+    ll expo = MOD - 2;
+
+    while (expo)
+    {
+
+        if (expo & 1)
+        {
+            p = (p * q) % MOD;
+        }
+        q = (q * q) % MOD;
+
+        expo >>= 1;
+    }
+
+    return p;
+}
+
+//
+
+const ll N = 1000005;
+bool VISI[N];
+
+void Sieve()
+{
+    memset(VISI, true, sizeof(VISI));
+
+    VISI[0] = VISI[1] = false;
+    for (ll i = 4; i < N; i += 2)
+        VISI[i] = false;
+    for (ll i = 3; i < N / i; i += 2)
+    {
+        if (!VISI[i])
+            continue;
+        for (ll j = i * i; j < N; j += i + i)
+            VISI[j] = false;
+    }
+}
+
+vi primes;
+
+void Gen()
+{
+    for (ll i = 2; i < N; i++)
+        if (VISI[i])
+            primes.pb(i);
+}
+
+//
+
+ll fact[N], facti[N];
+
+void Fact()
+{
+    fact[0] = 1;
+    for (ll i = 1; i <= N; i++)
+        fact[i] = (i * fact[i - 1]) % MOD;
+
+    facti[0] = 1;
+    for (ll i = 1; i <= N; i++)
+        facti[i] = modinv(1, fact[i]);
+}
+
+ll ncr(ll n, ll r)
+{
+    if (r > n)
+        return 0;
+
+    ll temp = fact[n] * facti[r] % MOD;
+    temp = temp * facti[n - r] % MOD;
+    return temp;
+}
+
+//
+
+vi parentt, siz;
+
+void make_set(int n)
+{
+    parentt.assign(n + 1, 0);
+    siz.assign(n + 1, 1);
+
+    for (ll i = 0; i <= n; i++)
+        parentt[i] = i;
+}
+
+ll find_set(int v)
+{
+    if (v == parentt[v])
+        return v;
+    return parentt[v] = find_set(parentt[v]);
+}
+
+void union_set(int a, int b)
+{
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b)
+    {
+        if (siz[a] < siz[b])
+            swap(a, b);
+        parentt[b] = a;
+        siz[a] += siz[b];
+    }
+}
+
+//
+
+vvi adj;
+vi vis1;
+vi par1;
+vi par2;
+vi dist1;
+vi dist2;
+
+void create_graph(ll n)
+{
+    adj.assign(n + 1, {});
+    vis1.assign(n + 1, 0);
+    par1.assign(n + 1, -1);
+    par2.assign(n + 1, -1);
+    dist1.assign(n + 1, inf);
+    dist2.assign(n + 1, inf);
+}
+
+void dfs(ll curr, vi &vis)
+{
+    if (vis[curr] == 1)
+        return;
+
+    vis[curr] = 1;
+
+    for (auto x : adj[curr])
+    {
+        if (!vis[x])
+        {
+            dfs(x, vis);
+        }
+    }
+
+    return;
+}
+
+void bfs(ll curr, vi &vis, vi &par, vi &dist)
+{
+    queue<ll> q;
+
+    vis[curr] = 1;
+    dist[curr] = 0;
+    q.push(curr);
+
+    while (!q.empty())
+    {
+        auto u = q.front();
+        q.pop();
+
+        for (auto x : adj[u])
+        {
+            if (!vis[x])
+            {
+                vis[x] = 1;
+                par[x] = u;
+                dist[x] = 1 + dist[u];
+                q.push(x);
+            }
+        }
+    }
+}
+
+// void djikstra(ll curr)
+// {
+//     dist2[curr]=0;
+
+//     priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+
+//     pq.push({0,curr});
+
+//     while(!pq.empty())
+//     {
+//         int u=pq.top().second;
+//         int distance=pq.top().first;
+
+//         pq.pop();
+
+//         if(dist2[u]==distance)
+//         {
+//             for(auto x:adj[u])
+//             {
+//                 if(dist2[x.first]>dist2[u]+x.second)
+//                 {
+//                     dist2[x.first]=dist2[u]+x.second;
+//                     par2[x.first]=u;
+
+//                     pq.push({dist2[x.first],x.first});
+//                 }
+//             }
+//         }
+//     }
+// }
+
+//
+
+/*                  CODE      STARTS       HERE        */
+
+
+
+signed main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+
+    
+
+    return 0;
+}

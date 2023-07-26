@@ -8,6 +8,10 @@ const LogInSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true
+    },
+    solvedProblems: {
+        type: [Boolean],
+        default: [false, false, false, false] // Initializing with four false values(unsolved)
     }
 });
 

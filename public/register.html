@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="./navbar.css">
+    <link rel="stylesheet" href="./sign.css">
+</head>
+<body>
+    <div class="topnav">
+        <a href="./homepage">Home</a>
+        <a href="./login">Login</a>
+        <a href="./register">Register</a>
+    </div>
+
+    <div class="center">
+        <h1>Sign Up</h1>
+        <form action="/signup" method="post">
+            <div class="txt">
+                <input type="text" required name="username">
+                <label>Username</label>
+            </div>
+            <div class="txt">
+                <input type="password" required name="password">
+                <label>Password</label>
+            </div>
+            <input type="submit" value="Sign Up">
+            <div class="change">
+                Already a member? <a href="\login">Login</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Get the 'alert' query parameter from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const alertMessage = urlParams.get('alert');
+    
+        // Check the alert type and show the corresponding alert
+        if(alertMessage!=null)
+            alert(alertMessage);
+
+    </script>
+
+
+</body>
+</html>
